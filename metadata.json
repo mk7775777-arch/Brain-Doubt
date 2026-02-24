@@ -1,0 +1,8 @@
+{
+  "name": "Braindoubt",
+  "description": "An advanced AI homework assistant and NCERT library that provides step-by-step solutions and access to all NCERT books from Class 1 to 12.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone"
+  ]
+}
