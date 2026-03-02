@@ -84,6 +84,33 @@
   animation: swirl 4s linear infinite;
 }
 
+@keyframes gradient-shift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.animate-gradient {
+  background-size: 200% 200%;
+  animation: gradient-shift 10s ease infinite;
+}
+
+.bg-tutor-purple {
+  background: linear-gradient(-45deg, #4c1d95, #7c3aed, #a855f7, #6366f1);
+}
+
+.bg-tutor-blue {
+  background: linear-gradient(-45deg, #1e3a8a, #1d4ed8, #2563eb, #3b82f6);
+}
+
+.bg-tutor-emerald {
+  background: linear-gradient(-45deg, #064e3b, #065f46, #059669, #10b981);
+}
+
+.bg-tutor-rose {
+  background: linear-gradient(-45deg, #881337, #9f1239, #e11d48, #f43f5e);
+}
+
 .dashed-box {
   background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' rx='24' ry='24' stroke='%236366F1' stroke-width='3' stroke-dasharray='12%2c 12' stroke-dashoffset='0' stroke-linecap='square'/%3e%3c/svg%3e");
 }

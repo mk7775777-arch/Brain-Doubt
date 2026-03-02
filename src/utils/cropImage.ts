@@ -10,6 +10,8 @@ export const createImage = (url: string): Promise<HTMLImageElement> =>
 export default async function getCroppedImg(
   imageSrc: string,
   pixelCrop: { x: number; y: number; width: number; height: number },
+  renderedWidth?: number,
+  renderedHeight?: number,
   rotation = 0
 ): Promise<string | null> {
   const image = await createImage(imageSrc)
@@ -20,23 +22,35 @@ export default async function getCroppedImg(
     return null
   }
 
-  // set canvas size to match the image
-  canvas.width = pixelCrop.width
-  canvas.height = pixelCrop.height
+  // Calculate scaling factor between rendered image and natural image
+  const scaleX = renderedWidth ? image.naturalWidth / renderedWidth : 1;
+  const scaleY = renderedHeight ? image.naturalHeight / renderedHeight : 1;
 
-  // draw the cropped image onto the canvas
+  // Scale the crop coordinates to match the natural image size
+  const naturalCrop = {
+    x: pixelCrop.x * scaleX,
+    y: pixelCrop.y * scaleY,
+    width: pixelCrop.width * scaleX,
+    height: pixelCrop.height * scaleY,
+  };
+
+  // set canvas size to match the natural crop size
+  canvas.width = naturalCrop.width
+  canvas.height = naturalCrop.height
+
+  // draw the cropped image onto the canvas using natural coordinates
   ctx.drawImage(
     image,
-    pixelCrop.x,
-    pixelCrop.y,
-    pixelCrop.width,
-    pixelCrop.height,
+    naturalCrop.x,
+    naturalCrop.y,
+    naturalCrop.width,
+    naturalCrop.height,
     0,
     0,
-    pixelCrop.width,
-    pixelCrop.height
+    naturalCrop.width,
+    naturalCrop.height
   )
 
   // return as base64
-  return canvas.toDataURL('image/jpeg')
+  return canvas.toDataURL('image/jpeg', 0.9)
 }

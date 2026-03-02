@@ -8,6 +8,7 @@ export interface Message {
   content: string;
   timestamp: number;
   rating?: 'bad' | 'neutral' | 'good' | 'great';
+  feedbackReason?: string;
   attachments?: {
     type: "image" | "audio";
     url: string;
